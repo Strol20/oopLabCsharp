@@ -44,7 +44,7 @@ namespace oop_lab2
         }
     }
 
-    internal class RectangleShape : Shape // Прямокутник
+    internal class RectangleShape : Shape // Прямокутник // TODO: Окремий метод для розрахунків координатів
     {
         public override void Draw(Graphics g)
         {
@@ -56,7 +56,7 @@ namespace oop_lab2
         }
     }
 
-    internal class EllipseShape : Shape
+    internal class EllipseShape : Shape // TODO: Окремий метод для розрахунків координатів
     {
         public override void Draw(Graphics g) // Еліпс
         {
