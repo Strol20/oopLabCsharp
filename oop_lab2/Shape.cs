@@ -1,5 +1,4 @@
-﻿using oop_lab2;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -28,7 +27,11 @@ namespace oop_lab2
     {
         public override void Draw(Graphics g)
         {
-            g.DrawEllipse(new Pen(colorPaint), x2 + 10, y2 + 10, x2 - 10, y2 - 10);
+            int radius = 10;    
+            int diameter = radius * 2;
+            SolidBrush redBrush = new SolidBrush(Color.Red);
+            // Fill ellipse on screen.
+            g.FillEllipse(new SolidBrush(colorPaint), x2 - radius, y2 - radius, diameter, diameter);
         }
     }
 
@@ -46,12 +49,10 @@ namespace oop_lab2
         public override void Draw(Graphics g)
         {
             // Используем сохраненные в Set() координаты для рисования
-            int width = Math.Abs(x2 - x1);
-            int height = Math.Abs(y2 - y1);
-            int x = Math.Min(x1, x2);
-            int y = Math.Min(y1, y2);
+            int dx = Math.Abs(x2 - x1);
+            int dy = Math.Abs(y2 - y1);
 
-            g.DrawRectangle(new Pen(colorPaint), x, y, width, height);
+            g.DrawRectangle(new Pen(colorPaint), x1-dx,y1-dy, 2*dx, 2*dy);
         }
     }
 
@@ -60,11 +61,9 @@ namespace oop_lab2
         public override void Draw(Graphics g) // Еліпс
         {
             // Используем сохраненные в Set() координаты для рисования
-            int width = Math.Abs(x2 - x1);
-            int height = Math.Abs(y2 - y1);
-            int x = Math.Min(x1, x2);
-            int y = Math.Min(y1, y2);
-            g.DrawEllipse(new Pen(colorPaint), x, y, width, height);
+            int dx = Math.Abs(x2 - x1);
+            int dy = Math.Abs(y2 - y1);
+            g.DrawEllipse(new Pen(colorPaint), x1 - dx, y1 - dy, 2 * dx, 2 * dy);
         }
     }
 }

@@ -9,28 +9,27 @@ namespace oop_lab2
         public Form1()
         {
             InitializeComponent();
-
+            //this.DoubleBuffered = true;
         }
         Point click;
         Point currentPoint;
         bool isDrawing = false; // Чи малюємо зараз лінію чи ні
         List<Shape> pcshape = new List<Shape>(); // Список фігур, які ми малюємо на формі
         string currentShapeTemplate = "DotShape";
-
+        private Color currentColor = Color.Black;
+        private Shape currentDrawingShape = null;
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g;
             g = CreateGraphics();
-            g.DrawLine(Pens.Gray, 100, 100, 500, 100);
             foreach (var shape in pcshape)
             {
-                shape.Draw(g); // TODO: Замінити на DrawShape
+                shape.Draw(g);
             }
             if (isDrawing)
             {
-                Shape tempShape = CreateShapeInstance(currentShapeTemplate);
-                DrawShape(g, tempShape, click, currentPoint);
+                DrawShape(g, currentDrawingShape, click, currentPoint, currentColor);
                 //g.DrawLine(Pens.Black, click.X, click.Y, currentPoint.X, currentPoint.Y);// TODO: Замінити на DrawShape
             }
         }
@@ -41,7 +40,7 @@ namespace oop_lab2
             {
                 isDrawing = true;
                 click = e.Location;
-
+                currentDrawingShape = CreateShapeInstance(currentShapeTemplate);
             }
         }
 
@@ -50,12 +49,12 @@ namespace oop_lab2
             if (e.Button == MouseButtons.Left)
             {
                 currentPoint = e.Location;
-                Shape newShape = CreateShapeInstance(currentShapeTemplate);
 
-                newShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, Color.Black);
+                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, currentColor);
 
                 // Сохраняем в список готовых фигур
-                pcshape.Add(newShape);
+                pcshape.Add(currentDrawingShape);
+                currentDrawingShape = null;
                 isDrawing = false;
 
                 this.Invalidate();
@@ -73,10 +72,8 @@ namespace oop_lab2
             }
         }
 
-
         private Shape CreateShapeInstance(string shapeTemplate)
         {
-            // Создаем новый экземпляр фигуры на основе текущего шаблона
             if (shapeTemplate == "DotShape")
                 return new DotShape();
             else if (shapeTemplate == "LineShape")
@@ -89,19 +86,26 @@ namespace oop_lab2
                 throw new InvalidOperationException("Unknown shape type");
         }
 
-        private void DrawShape(Graphics g, Shape shape, Point startPoint, Point endPoint)
+        private void DrawShape(Graphics g, Shape shape, Point startPoint, Point endPoint, Color color)
         {
             // Встановлюємо координати фігури
-            shape.SetCoordinates(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y, Color.Black);
+            shape.SetCoordinates(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y, color);
             // Малюємо фігуру
             shape.Draw(g);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Встановлюємо початковий шаблон фігури (наприклад, крапка)
-            currentShapeTemplate = "DotShape";
-        }
+        //private void curentColor(string shapeTemplate, bool isDrawing ) {
+        //    if (shapeTemplate == "DotShape")
+        //        return Color;
+        //    else if (shapeTemplate == "LineShape")
+        //        return new LineShape();
+        //    else if (shapeTemplate == "RectangleShape")
+        //        return new RectangleShape();
+        //    else if (shapeTemplate == "EllipseShape")
+        //        return new EllipseShape();
+        //    else
+        //        throw new InvalidOperationException("Unknown shape type");
+        //}
 
         // Аля RadioButton для ToolStripMenuItem
         private void крапкаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -119,7 +123,7 @@ namespace oop_lab2
 
             if (clickedItem != null)
             {
-                // Перевіряємо, яка кнопка була натиснута, і створюємо відповідний шаблон фігури
+                // Перевіряємо, яка кнопка була натиснута
                 switch (clickedItem.Text)
                 {
                     case "Крапка":
