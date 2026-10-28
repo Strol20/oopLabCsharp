@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Windows.Forms;
 namespace oop_lab2
 {
@@ -8,15 +9,13 @@ namespace oop_lab2
         public Form1()
         {
             InitializeComponent();
-            this.DoubleBuffered = true;
 
         }
-
         Point click;
         Point currentPoint;
         bool isDrawing = false; // Чи малюємо зараз лінію чи ні
         List<Shape> pcshape = new List<Shape>(); // Список фігур, які ми малюємо на формі
-        Shape currentShapeTemplate = new DotShape();
+        string currentShapeTemplate = "DotShape";
 
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -26,11 +25,12 @@ namespace oop_lab2
             g.DrawLine(Pens.Gray, 100, 100, 500, 100);
             foreach (var shape in pcshape)
             {
-                //shape.Draw(g); // TODO: Замінити на DrawShape
+                shape.Draw(g); // TODO: Замінити на DrawShape
             }
             if (isDrawing)
             {
-
+                Shape tempShape = CreateShapeInstance(currentShapeTemplate);
+                DrawShape(g, tempShape, click, currentPoint);
                 //g.DrawLine(Pens.Black, click.X, click.Y, currentPoint.X, currentPoint.Y);// TODO: Замінити на DrawShape
             }
         }
@@ -49,8 +49,15 @@ namespace oop_lab2
         {
             if (e.Button == MouseButtons.Left)
             {
-                isDrawing = false;
                 currentPoint = e.Location;
+                Shape newShape = CreateShapeInstance(currentShapeTemplate);
+
+                newShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, Color.Black);
+
+                // Сохраняем в список готовых фигур
+                pcshape.Add(newShape);
+                isDrawing = false;
+
                 this.Invalidate();
             }
 
@@ -67,6 +74,21 @@ namespace oop_lab2
         }
 
 
+        private Shape CreateShapeInstance(string shapeTemplate)
+        {
+            // Создаем новый экземпляр фигуры на основе текущего шаблона
+            if (shapeTemplate == "DotShape")
+                return new DotShape();
+            else if (shapeTemplate == "LineShape")
+                return new LineShape();
+            else if (shapeTemplate == "RectangleShape")
+                return new RectangleShape();
+            else if (shapeTemplate == "EllipseShape")
+                return new EllipseShape();
+            else
+                throw new InvalidOperationException("Unknown shape type");
+        }
+
         private void DrawShape(Graphics g, Shape shape, Point startPoint, Point endPoint)
         {
             // Встановлюємо координати фігури
@@ -78,7 +100,7 @@ namespace oop_lab2
         private void Form1_Load(object sender, EventArgs e)
         {
             // Встановлюємо початковий шаблон фігури (наприклад, крапка)
-            currentShapeTemplate = new DotShape();
+            currentShapeTemplate = "DotShape";
         }
 
         // Аля RadioButton для ToolStripMenuItem
@@ -101,19 +123,19 @@ namespace oop_lab2
                 switch (clickedItem.Text)
                 {
                     case "Крапка":
-                        currentShapeTemplate = new DotShape();
+                        currentShapeTemplate = "DotShape";
                         break;
 
                     case "Лінія":
-                        currentShapeTemplate = new LineShape();
+                        currentShapeTemplate = "LineShape";
                         break;
 
                     case "Прямокутник":
-                        currentShapeTemplate = new RectangleShape();
+                        currentShapeTemplate = "RectangleShape";
                         break;
 
                     case "Еліпс":
-                        currentShapeTemplate = new EllipseShape();
+                        currentShapeTemplate = "EllipseShape";
                         break;
                 }
 
