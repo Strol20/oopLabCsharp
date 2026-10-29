@@ -9,27 +9,31 @@ namespace oop_lab2
         public Form1()
         {
             InitializeComponent();
-            //this.DoubleBuffered = true;
+            this.DoubleBuffered = true;
         }
         Point click;
         Point currentPoint;
         bool isDrawing = false; // Чи малюємо зараз лінію чи ні
-        List<Shape> pcshape = new List<Shape>(); // Список фігур, які ми малюємо на формі
+        List<Shape> pcshape = new List<Shape>(); // Список фігур, які ми малюємо на формі Окремий метод 
         string currentShapeTemplate = "DotShape";
-        private Color currentColor = Color.Black;
         private Shape currentDrawingShape = null;
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g;
-            g = CreateGraphics();
+
+            // Не робе. Із за пари строчик коду, заважало виправити мерцання навіть з DoubleBuffered = true;
+            //Graphics g;
+            //g = CreateGraphics();
+
+            Graphics g = e.Graphics;
             foreach (var shape in pcshape)
             {
                 shape.Draw(g);
             }
             if (isDrawing)
             {
-                DrawShape(g, currentDrawingShape, click, currentPoint, currentColor);
+                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, isDrawing);
+                currentDrawingShape.Draw(g, true);
                 //g.DrawLine(Pens.Black, click.X, click.Y, currentPoint.X, currentPoint.Y);// TODO: Замінити на DrawShape
             }
         }
@@ -40,7 +44,9 @@ namespace oop_lab2
             {
                 isDrawing = true;
                 click = e.Location;
+                currentPoint = e.Location;
                 currentDrawingShape = CreateShapeInstance(currentShapeTemplate);
+                this.Invalidate();
             }
         }
 
@@ -50,7 +56,7 @@ namespace oop_lab2
             {
                 currentPoint = e.Location;
 
-                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, currentColor);
+                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, isDrawing);
 
                 // Сохраняем в список готовых фигур
                 pcshape.Add(currentDrawingShape);
@@ -84,14 +90,6 @@ namespace oop_lab2
                 return new EllipseShape();
             else
                 throw new InvalidOperationException("Unknown shape type");
-        }
-
-        private void DrawShape(Graphics g, Shape shape, Point startPoint, Point endPoint, Color color)
-        {
-            // Встановлюємо координати фігури
-            shape.SetCoordinates(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y, color);
-            // Малюємо фігуру
-            shape.Draw(g);
         }
 
         //private void curentColor(string shapeTemplate, bool isDrawing ) {
