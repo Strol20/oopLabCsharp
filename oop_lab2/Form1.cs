@@ -32,9 +32,8 @@ namespace oop_lab2
             }
             if (isDrawing)
             {
-                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, isDrawing);
-                currentDrawingShape.Draw(g, true);
-                //g.DrawLine(Pens.Black, click.X, click.Y, currentPoint.X, currentPoint.Y);// TODO: Замінити на DrawShape
+                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y);
+                currentDrawingShape.Draw(g, isDrawing);
             }
         }
 
@@ -56,9 +55,9 @@ namespace oop_lab2
             {
                 currentPoint = e.Location;
 
-                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y, isDrawing);
+                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y);
 
-                // Сохраняем в список готовых фигур
+                // TODO: Новий методля для обмеження динамічного масиву
                 pcshape.Add(currentDrawingShape);
                 currentDrawingShape = null;
                 isDrawing = false;

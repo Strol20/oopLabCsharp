@@ -23,19 +23,18 @@ namespace oop_lab2
 
         }
 
-        protected (Pen, Brush) GetPenAndBrush(bool isTemporary, Color defaultFillColor)
+        protected (Pen, Brush) GetPenAndBrush(bool isTemporary, Color defaultFillColor)// TODO: Перенести або прямо в Draw або в нормалізація
         {
             if (isTemporary)
             {
-                // "Резиновый" след: сплошная красная линия (Ж mod 4 = 1 для варианта 21)
-                // Для превью используем полупрозрачный красный цвет заливки
+                // Карандашик тимчасовиий поки малюєш
                 Pen tempPen = new Pen(Color.Red, 1) { DashStyle = DashStyle.Solid };
                 Brush tempBrush = new SolidBrush(defaultFillColor);
                 return (tempPen, tempBrush);
             }
             else
             {
-                // Финальная отрисовка: черный контур + цветная заливка
+                // Для збереженя
                 Pen mainPen = new Pen(Color.Black);
                 Brush mainBrush = new SolidBrush(defaultFillColor);
                 return (mainPen, mainBrush);
@@ -62,7 +61,6 @@ namespace oop_lab2
     {
         public override void Draw(Graphics g, bool isTemporary = false)
         {
-            // Используем сохраненные в Set() координаты для рисования
             var (pen, brush) = GetPenAndBrush(isTemporary, colorPaint);
             g.DrawLine(pen, x1, y1, x2, y2);
         }
