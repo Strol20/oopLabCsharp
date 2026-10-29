@@ -12,15 +12,15 @@ namespace oop_lab2
     {
         protected int x1, y1, x2, y2;
         protected Color colorPaint;
-        protected bool isDrawing;
 
-        public void SetCoordinates(int x1, int y1, int x2, int y2, bool isDrawing) // для кординат
+
+        public void SetCoordinates(int x1, int y1, int x2, int y2) // для кординат
         {
             this.x1 = x1;
             this.y1 = y1;
             this.x2 = x2;
             this.y2 = y2;
-            this.isDrawing = isDrawing;
+
         }
 
         protected (Pen, Brush) GetPenAndBrush(bool isTemporary, Color defaultFillColor)
@@ -36,7 +36,7 @@ namespace oop_lab2
             else
             {
                 // Финальная отрисовка: черный контур + цветная заливка
-                Pen mainPen = new Pen(Color.Black, 1);
+                Pen mainPen = new Pen(Color.Black);
                 Brush mainBrush = new SolidBrush(defaultFillColor);
                 return (mainPen, mainBrush);
             }
@@ -49,7 +49,7 @@ namespace oop_lab2
     {
         public override void Draw(Graphics g, bool isTemporary = false)
         {
-            Color fillColor = isDrawing ? Color.Black : Color.Red;
+            Color fillColor = isTemporary ? Color.Red : Color.Black;
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
             int diameter = 20;
             int radius = diameter / 2;    
@@ -75,7 +75,7 @@ namespace oop_lab2
 
             int dx = Math.Abs(x2 - x1);
             int dy = Math.Abs(y2 - y1);
-            Color fillColor = isDrawing ? Color.Pink : Color.Transparent;
+            Color fillColor = isTemporary ? Color.Transparent : Color.Pink;
 
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);//ХУЙНЯ
             g.FillRectangle(brush, x1 - dx, y1 - dy, 2 * dx, 2 * dy);
@@ -87,7 +87,7 @@ namespace oop_lab2
     {
         public override void Draw(Graphics g, bool isTemporary = false) // Еліпс
         {
-            Color fillColor = isDrawing ? Color.White : Color.Transparent;
+            Color fillColor = isTemporary ? Color.Transparent : Color.White;
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
             g.FillEllipse(brush, x1, y1, x2 - x1, y2 - y1);
             g.DrawEllipse(pen, x1, y1, x2-x1, y2-y1);
