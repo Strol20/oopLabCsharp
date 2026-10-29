@@ -75,7 +75,7 @@ namespace oop_lab2
             int dy = Math.Abs(y2 - y1);
             Color fillColor = isTemporary ? Color.Transparent : Color.Pink;
 
-            var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);//ХУЙНЯ
+            var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
             g.FillRectangle(brush, x1 - dx, y1 - dy, 2 * dx, 2 * dy);
             g.DrawRectangle(pen, x1-dx,y1-dy, 2*dx, 2*dy);
         }

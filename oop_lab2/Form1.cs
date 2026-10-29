@@ -14,9 +14,31 @@ namespace oop_lab2
         Point click;
         Point currentPoint;
         bool isDrawing = false; // Чи малюємо зараз лінію чи ні
-        List<Shape> pcshape = new List<Shape>(); // Список фігур, які ми малюємо на формі Окремий метод 
         string currentShapeTemplate = "DotShape";
         private Shape currentDrawingShape = null;
+        List<Shape> pcshape = new List<Shape>(); // Список фігур, які ми малюємо на формі Окремий метод 
+
+
+        //Чекер динамічного масиву, щоб не перевищити його розмір. Якщо перевищує, то виводимо повідомлення про помилку
+        private const int N = 121;
+        private bool AddShapeToDynamicArray(Shape shape)
+        {
+            if (shape == null) return false;
+
+            if (pcshape.Count < N)
+            {
+                pcshape.Add(shape);
+                return true;
+            }
+            else
+            {
+                MessageBox.Show($"Досягнуто максимальний ліміт елементів масиву (N = {N})!",
+                                "Помилка",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return false;
+            }
+        }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -58,7 +80,7 @@ namespace oop_lab2
                 currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y);
 
                 // TODO: Новий методля для обмеження динамічного масиву
-                pcshape.Add(currentDrawingShape);
+                AddShapeToDynamicArray(currentDrawingShape);
                 currentDrawingShape = null;
                 isDrawing = false;
 
@@ -105,7 +127,7 @@ namespace oop_lab2
         //}
 
         // Аля RadioButton для ToolStripMenuItem
-        private void крапкаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toolStripMenuItem_Click(object sender, EventArgs e) //TODO: Переіменувати крилицю
         {
             var clickedItem = sender as ToolStripMenuItem;
             // Знімаємо вибір з усіньких інших пунктів меню після кліку 
@@ -114,7 +136,6 @@ namespace oop_lab2
                 if (item is ToolStripMenuItem menuItem && item != clickedItem)
                 {
                     menuItem.Checked = false;
-                    Console.WriteLine(menuItem);
                 }
             }
 
