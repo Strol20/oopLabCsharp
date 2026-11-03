@@ -1,0 +1,3 @@
+[submodule "oop_Labs"]
+	path = oop_Labs
+	url = https://github.com/Strol20/oop_Labs.git
