@@ -84,8 +84,7 @@ namespace oop_lab3
         {
             int dx = Math.Abs(x2 - x1);
             int dy = Math.Abs(y2 - y1);
-            Color fillColor = isTemporary ? Color.Transparent : Color.White;
-            var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
+            var (pen, brush) = GetPenAndBrush(isTemporary, colorPaint);
             g.DrawEllipse(pen, x1 - dx, y1 - dy, 2 * dx, 2 * dy);
         }
     }
