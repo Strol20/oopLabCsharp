@@ -45,14 +45,15 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, обєктиToolStripMenuItem, довідкаToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 33);
+            menuStrip1.Padding = new Padding(5, 2, 0, 2);
+            menuStrip1.Size = new Size(640, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
             // файлToolStripMenuItem
             // 
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new Size(69, 29);
+            файлToolStripMenuItem.Size = new Size(59, 24);
             файлToolStripMenuItem.Text = "Файл";
             // 
             // обєктиToolStripMenuItem
@@ -61,54 +62,59 @@
             обєктиToolStripMenuItem.CheckState = CheckState.Checked;
             обєктиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { крапкаToolStripMenuItem, лініяToolStripMenuItem, прямокутникToolStripMenuItem, еліпсToolStripMenuItem });
             обєктиToolStripMenuItem.Name = "обєктиToolStripMenuItem";
-            обєктиToolStripMenuItem.Size = new Size(90, 29);
+            обєктиToolStripMenuItem.Size = new Size(75, 24);
             обєктиToolStripMenuItem.Text = "Об'єкти";
             // 
             // крапкаToolStripMenuItem
             // 
             крапкаToolStripMenuItem.CheckOnClick = true;
             крапкаToolStripMenuItem.Name = "крапкаToolStripMenuItem";
-            крапкаToolStripMenuItem.Size = new Size(270, 34);
+            крапкаToolStripMenuItem.Size = new Size(224, 26);
             крапкаToolStripMenuItem.Text = "Крапка";
+            крапкаToolStripMenuItem.ToolTipText = "Малює чорну крапку";
             крапкаToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
             // лініяToolStripMenuItem
             // 
             лініяToolStripMenuItem.CheckOnClick = true;
             лініяToolStripMenuItem.Name = "лініяToolStripMenuItem";
-            лініяToolStripMenuItem.Size = new Size(270, 34);
+            лініяToolStripMenuItem.Size = new Size(224, 26);
             лініяToolStripMenuItem.Text = "Лінія";
+            лініяToolStripMenuItem.ToolTipText = "Малює чорну лінію";
             лініяToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
             // прямокутникToolStripMenuItem
             // 
             прямокутникToolStripMenuItem.CheckOnClick = true;
             прямокутникToolStripMenuItem.Name = "прямокутникToolStripMenuItem";
-            прямокутникToolStripMenuItem.Size = new Size(270, 34);
+            прямокутникToolStripMenuItem.Size = new Size(224, 26);
             прямокутникToolStripMenuItem.Text = "Прямокутник";
+            прямокутникToolStripMenuItem.ToolTipText = "Малює оранжевий прямокутник";
             прямокутникToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
             // еліпсToolStripMenuItem
             // 
             еліпсToolStripMenuItem.CheckOnClick = true;
             еліпсToolStripMenuItem.Name = "еліпсToolStripMenuItem";
-            еліпсToolStripMenuItem.Size = new Size(270, 34);
+            еліпсToolStripMenuItem.Size = new Size(224, 26);
             еліпсToolStripMenuItem.Text = "Еліпс";
+            еліпсToolStripMenuItem.ToolTipText = "Малює пустий, синій еліпс";
             еліпсToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
             // довідкаToolStripMenuItem
             // 
             довідкаToolStripMenuItem.Name = "довідкаToolStripMenuItem";
-            довідкаToolStripMenuItem.Size = new Size(93, 29);
+            довідкаToolStripMenuItem.Size = new Size(77, 24);
             довідкаToolStripMenuItem.Text = "Довідка";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(640, 360);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Form1";
             Text = "Form1";
             Paint += Form1_Paint;
