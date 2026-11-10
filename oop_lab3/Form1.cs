@@ -25,7 +25,7 @@ namespace oop_lab3
 
             if (shapeCount < N)
             {
-                pcshape[shapeCount]= shape;
+                pcshape[shapeCount] = shape;
                 shapeCount++;
                 return true;
             }
@@ -129,7 +129,7 @@ namespace oop_lab3
         //}
 
         // Аля RadioButton для ToolStripMenuItem
-        private void toolStripMenuItem_Click(object sender, EventArgs e) //TODO: Переіменувати крилицю
+        private void toolStripMenuItem_Click(object sender, EventArgs e)
         {
             var clickedItem = sender as ToolStripMenuItem;
             // Знімаємо вибір з усіньких інших пунктів меню після кліку 
@@ -170,5 +170,47 @@ namespace oop_lab3
                 clickedItem.Checked = true;
             }
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var clickedItem = sender as ToolStripMenuItem;
+            // Знімаємо вибір з усіньких інших пунктів меню після кліку 
+            foreach (ToolStripItem item in clickedItem.GetCurrentParent().Items)
+            {
+                if (item is ToolStripMenuItem menuItem && item != clickedItem)
+                {
+                    menuItem.Checked = false;
+                }
+            }
+
+            if (clickedItem != null)
+            {
+                // Перевіряємо, яка кнопка була натиснута
+                switch (clickedItem.Text)
+                {
+                    case "Крапка":
+                        currentShapeTemplate = "DotShape";
+                        break;
+
+                    case "Лінія":
+                        currentShapeTemplate = "LineShape";
+                        break;
+
+                    case "Прямокутник":
+                        currentShapeTemplate = "RectangleShape";
+                        break;
+
+                    case "Еліпс":
+                        currentShapeTemplate = "EllipseShape";
+                        break;
+                }
+
+                // Вивід назви вибраної кнопки у заголовок форми
+                this.Text = "Графічний редактор - " + clickedItem.Text;
+
+                //Встановлюємо прапорець для вибраного пункту меню
+                clickedItem.Checked = true;
+            }
+    }
     }
 }
