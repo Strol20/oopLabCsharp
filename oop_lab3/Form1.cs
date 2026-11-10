@@ -114,103 +114,63 @@ namespace oop_lab3
             else
                 throw new InvalidOperationException("Unknown shape type");
         }
-
-        //private void curentColor(string shapeTemplate, bool isDrawing ) {
-        //    if (shapeTemplate == "DotShape")
-        //        return Color;
-        //    else if (shapeTemplate == "LineShape")
-        //        return new LineShape();
-        //    else if (shapeTemplate == "RectangleShape")
-        //        return new RectangleShape();
-        //    else if (shapeTemplate == "EllipseShape")
-        //        return new EllipseShape();
-        //    else
-        //        throw new InvalidOperationException("Unknown shape type");
-        //}
-
-        // Аля RadioButton для ToolStripMenuItem
-        private void toolStripMenuItem_Click(object sender, EventArgs e)
+        //Метод для вибору форми малювання і для оновлення стану кнопок та пунктів меню
+        private void SelectShape(string shapeName)
         {
-            var clickedItem = sender as ToolStripMenuItem;
-            // Знімаємо вибір з усіньких інших пунктів меню після кліку 
-            foreach (ToolStripItem item in clickedItem.GetCurrentParent().Items)
+            // Встановлюємо шаблон малювання
+            switch (shapeName)
             {
-                if (item is ToolStripMenuItem menuItem && item != clickedItem)
+                case "Крапка": currentShapeTemplate = "DotShape"; break;
+                case "Лінія": currentShapeTemplate = "LineShape"; break;
+                case "Прямокутник": currentShapeTemplate = "RectangleShape"; break;
+                case "Еліпс": currentShapeTemplate = "EllipseShape"; break;
+                default: currentShapeTemplate = "DotShape"; break;
+            }
+
+            this.Text = "Графічний редактор - " + shapeName;
+
+            // Оновлюємо галочки на ToolStrip
+            if (toolStrip1 != null)
+            {
+                foreach (ToolStripItem item in toolStrip1.Items)
                 {
-                    menuItem.Checked = false;
+                    if (item is ToolStripButton btn)
+                    {
+                         btn.Checked = (btn.Text == shapeName);
+                    }
                 }
             }
 
-            if (clickedItem != null)
+            // Оновлюємо галочки в MenuStrip
+            if (objectToolStripMenuItem != null)
             {
-                // Перевіряємо, яка кнопка була натиснута
-                switch (clickedItem.Text)
+                // ТІЛЬКИ objectToolStripMenuItem
+                foreach (ToolStripItem item in objectToolStripMenuItem.DropDownItems)
                 {
-                    case "Крапка":
-                        currentShapeTemplate = "DotShape";
-                        break;
-
-                    case "Лінія":
-                        currentShapeTemplate = "LineShape";
-                        break;
-
-                    case "Прямокутник":
-                        currentShapeTemplate = "RectangleShape";
-                        break;
-
-                    case "Еліпс":
-                        currentShapeTemplate = "EllipseShape";
-                        break;
+                    if (item is ToolStripMenuItem menuItem)
+                    {
+                            menuItem.Checked = (menuItem.Text == shapeName);
+                    }
                 }
+            }
+        }
 
-                // Вивід назви вибраної кнопки у заголовок форми
-                this.Text = "Графічний редактор - " + clickedItem.Text;
 
-                //Встановлюємо прапорець для вибраного пункту меню
-                clickedItem.Checked = true;
+        // Обробник кліків кнопок і пунктів меню 
+        private void toolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem clickedItem)
+            {
+                SelectShape(clickedItem.Text); 
             }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            var clickedItem = sender as ToolStripButton;
-            // Знімаємо вибір з усіньких інших пунктів меню після кліку 
-            foreach (ToolStripButton item in clickedItem.GetCurrentParent().Items)
+            if (sender is ToolStripButton clickedItem)
             {
-                if (item is ToolStripButton menuItem && item != clickedItem)
-                {
-                    menuItem.Checked = false;
-                }
+                SelectShape(clickedItem.Text); 
             }
-
-            if (clickedItem != null)
-            {
-                // Перевіряємо, яка кнопка була натиснута
-                switch (clickedItem.Text)
-                {
-                    case "Крапка":
-                        currentShapeTemplate = "DotShape";
-                        break;
-
-                    case "Лінія":
-                        currentShapeTemplate = "LineShape";
-                        break;
-
-                    case "Прямокутник":
-                        currentShapeTemplate = "RectangleShape";
-                        break;
-
-                    case "Еліпс":
-                        currentShapeTemplate = "EllipseShape";
-                        break;
-                }
-
-                // Вивід назви вибраної кнопки у заголовок форми
-                this.Text = "Графічний редактор - " + clickedItem.Text;
-
-                //Встановлюємо прапорець для вибраного пункту меню
-                clickedItem.Checked = true;
-            }
-    }
+        }
     }
 }
