@@ -35,14 +35,14 @@
             lineToolStripMenuItem = new ToolStripMenuItem();
             regectalesToolStripMenuItem = new ToolStripMenuItem();
             elipseToolStripMenuItem = new ToolStripMenuItem();
-            довідкаToolStripMenuItem = new ToolStripMenuItem();
+            tipsToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, objectToolStripMenuItem, довідкаToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, objectToolStripMenuItem, tipsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
@@ -101,11 +101,11 @@
             elipseToolStripMenuItem.ToolTipText = "Малює пустий, синій еліпс";
             elipseToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
-            // довідкаToolStripMenuItem
+            // tipsToolStripMenuItem
             // 
-            довідкаToolStripMenuItem.Name = "довідкаToolStripMenuItem";
-            довідкаToolStripMenuItem.Size = new Size(77, 24);
-            довідкаToolStripMenuItem.Text = "Довідка";
+            tipsToolStripMenuItem.Name = "tipsToolStripMenuItem";
+            tipsToolStripMenuItem.Size = new Size(77, 24);
+            tipsToolStripMenuItem.Text = "Довідка";
             // 
             // Form1
             // 
@@ -136,6 +136,6 @@
         private ToolStripMenuItem lineToolStripMenuItem;
         private ToolStripMenuItem regectalesToolStripMenuItem;
         private ToolStripMenuItem elipseToolStripMenuItem;
-        private ToolStripMenuItem довідкаToolStripMenuItem;
+        private ToolStripMenuItem tipsToolStripMenuItem;
     }
 }
