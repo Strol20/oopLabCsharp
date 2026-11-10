@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            файлToolStripMenuItem = new ToolStripMenuItem();
-            обєктиToolStripMenuItem = new ToolStripMenuItem();
-            крапкаToolStripMenuItem = new ToolStripMenuItem();
-            лініяToolStripMenuItem = new ToolStripMenuItem();
-            прямокутникToolStripMenuItem = new ToolStripMenuItem();
-            еліпсToolStripMenuItem = new ToolStripMenuItem();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            objectToolStripMenuItem = new ToolStripMenuItem();
+            pointToolStripMenuItem = new ToolStripMenuItem();
+            lineToolStripMenuItem = new ToolStripMenuItem();
+            regectalesToolStripMenuItem = new ToolStripMenuItem();
+            elipseToolStripMenuItem = new ToolStripMenuItem();
             довідкаToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -42,7 +42,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(24, 24);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, обєктиToolStripMenuItem, довідкаToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, objectToolStripMenuItem, довідкаToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(5, 2, 0, 2);
@@ -50,56 +50,56 @@
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // файлToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new Size(59, 24);
-            файлToolStripMenuItem.Text = "Файл";
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(59, 24);
+            fileToolStripMenuItem.Text = "Файл";
             // 
-            // обєктиToolStripMenuItem
+            // objectToolStripMenuItem
             // 
-            обєктиToolStripMenuItem.Checked = true;
-            обєктиToolStripMenuItem.CheckState = CheckState.Checked;
-            обєктиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { крапкаToolStripMenuItem, лініяToolStripMenuItem, прямокутникToolStripMenuItem, еліпсToolStripMenuItem });
-            обєктиToolStripMenuItem.Name = "обєктиToolStripMenuItem";
-            обєктиToolStripMenuItem.Size = new Size(75, 24);
-            обєктиToolStripMenuItem.Text = "Об'єкти";
+            objectToolStripMenuItem.Checked = true;
+            objectToolStripMenuItem.CheckState = CheckState.Checked;
+            objectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pointToolStripMenuItem, lineToolStripMenuItem, regectalesToolStripMenuItem, elipseToolStripMenuItem });
+            objectToolStripMenuItem.Name = "objectToolStripMenuItem";
+            objectToolStripMenuItem.Size = new Size(75, 24);
+            objectToolStripMenuItem.Text = "Об'єкти";
             // 
-            // крапкаToolStripMenuItem
+            // pointToolStripMenuItem
             // 
-            крапкаToolStripMenuItem.CheckOnClick = true;
-            крапкаToolStripMenuItem.Name = "крапкаToolStripMenuItem";
-            крапкаToolStripMenuItem.Size = new Size(224, 26);
-            крапкаToolStripMenuItem.Text = "Крапка";
-            крапкаToolStripMenuItem.ToolTipText = "Малює чорну крапку";
-            крапкаToolStripMenuItem.Click += toolStripMenuItem_Click;
+            pointToolStripMenuItem.CheckOnClick = true;
+            pointToolStripMenuItem.Name = "pointToolStripMenuItem";
+            pointToolStripMenuItem.Size = new Size(224, 26);
+            pointToolStripMenuItem.Text = "Крапка";
+            pointToolStripMenuItem.ToolTipText = "Малює чорну крапку";
+            pointToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
-            // лініяToolStripMenuItem
+            // lineToolStripMenuItem
             // 
-            лініяToolStripMenuItem.CheckOnClick = true;
-            лініяToolStripMenuItem.Name = "лініяToolStripMenuItem";
-            лініяToolStripMenuItem.Size = new Size(224, 26);
-            лініяToolStripMenuItem.Text = "Лінія";
-            лініяToolStripMenuItem.ToolTipText = "Малює чорну лінію";
-            лініяToolStripMenuItem.Click += toolStripMenuItem_Click;
+            lineToolStripMenuItem.CheckOnClick = true;
+            lineToolStripMenuItem.Name = "lineToolStripMenuItem";
+            lineToolStripMenuItem.Size = new Size(224, 26);
+            lineToolStripMenuItem.Text = "Лінія";
+            lineToolStripMenuItem.ToolTipText = "Малює чорну лінію";
+            lineToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
-            // прямокутникToolStripMenuItem
+            // regectalesToolStripMenuItem
             // 
-            прямокутникToolStripMenuItem.CheckOnClick = true;
-            прямокутникToolStripMenuItem.Name = "прямокутникToolStripMenuItem";
-            прямокутникToolStripMenuItem.Size = new Size(224, 26);
-            прямокутникToolStripMenuItem.Text = "Прямокутник";
-            прямокутникToolStripMenuItem.ToolTipText = "Малює оранжевий прямокутник";
-            прямокутникToolStripMenuItem.Click += toolStripMenuItem_Click;
+            regectalesToolStripMenuItem.CheckOnClick = true;
+            regectalesToolStripMenuItem.Name = "regectalesToolStripMenuItem";
+            regectalesToolStripMenuItem.Size = new Size(224, 26);
+            regectalesToolStripMenuItem.Text = "Прямокутник";
+            regectalesToolStripMenuItem.ToolTipText = "Малює оранжевий прямокутник";
+            regectalesToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
-            // еліпсToolStripMenuItem
+            // elipseToolStripMenuItem
             // 
-            еліпсToolStripMenuItem.CheckOnClick = true;
-            еліпсToolStripMenuItem.Name = "еліпсToolStripMenuItem";
-            еліпсToolStripMenuItem.Size = new Size(224, 26);
-            еліпсToolStripMenuItem.Text = "Еліпс";
-            еліпсToolStripMenuItem.ToolTipText = "Малює пустий, синій еліпс";
-            еліпсToolStripMenuItem.Click += toolStripMenuItem_Click;
+            elipseToolStripMenuItem.CheckOnClick = true;
+            elipseToolStripMenuItem.Name = "elipseToolStripMenuItem";
+            elipseToolStripMenuItem.Size = new Size(224, 26);
+            elipseToolStripMenuItem.Text = "Еліпс";
+            elipseToolStripMenuItem.ToolTipText = "Малює пустий, синій еліпс";
+            elipseToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
             // довідкаToolStripMenuItem
             // 
@@ -114,7 +114,7 @@
             ClientSize = new Size(640, 360);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
             Paint += Form1_Paint;
@@ -130,12 +130,12 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem файлToolStripMenuItem;
-        private ToolStripMenuItem обєктиToolStripMenuItem;
-        private ToolStripMenuItem крапкаToolStripMenuItem;
-        private ToolStripMenuItem лініяToolStripMenuItem;
-        private ToolStripMenuItem прямокутникToolStripMenuItem;
-        private ToolStripMenuItem еліпсToolStripMenuItem;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem objectToolStripMenuItem;
+        private ToolStripMenuItem pointToolStripMenuItem;
+        private ToolStripMenuItem lineToolStripMenuItem;
+        private ToolStripMenuItem regectalesToolStripMenuItem;
+        private ToolStripMenuItem elipseToolStripMenuItem;
         private ToolStripMenuItem довідкаToolStripMenuItem;
     }
 }
