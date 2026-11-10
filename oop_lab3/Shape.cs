@@ -48,7 +48,6 @@ namespace oop_lab3
     {
         public override void Draw(Graphics g, bool isTemporary = false)
         {
-            Color fillColor = isTemporary ? Color.Red : Color.Black;
             Color fillColor = isTemporary ? Color.Blue : Color.Black;
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
             int diameter = 20;
