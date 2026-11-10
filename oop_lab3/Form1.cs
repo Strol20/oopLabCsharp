@@ -173,11 +173,11 @@ namespace oop_lab3
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            var clickedItem = sender as ToolStripMenuItem;
+            var clickedItem = sender as ToolStripButton;
             // Знімаємо вибір з усіньких інших пунктів меню після кліку 
-            foreach (ToolStripItem item in clickedItem.GetCurrentParent().Items)
+            foreach (ToolStripButton item in clickedItem.GetCurrentParent().Items)
             {
-                if (item is ToolStripMenuItem menuItem && item != clickedItem)
+                if (item is ToolStripButton menuItem && item != clickedItem)
                 {
                     menuItem.Checked = false;
                 }
