@@ -77,7 +77,7 @@ namespace oop_lab2
 
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
             g.FillRectangle(brush, x1 - dx, y1 - dy, 2 * dx, 2 * dy);
-            g.DrawRectangle(pen, x1-dx,y1-dy, 2*dx, 2*dy);
+            g.DrawRectangle(pen, x1 - dx,y1 - dy, 2 * dx, 2 * dy);
         }
     }
 
@@ -85,10 +85,14 @@ namespace oop_lab2
     {
         public override void Draw(Graphics g, bool isTemporary = false) // Еліпс
         {
+            int x = Math.Min(x1, x2);
+            int y = Math.Min(y1, y2);
+            int width = Math.Abs(x2 - x1);
+            int height = Math.Abs(y2 - y1);
             Color fillColor = isTemporary ? Color.Transparent : Color.White;
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
-            g.FillEllipse(brush, x1, y1, x2 - x1, y2 - y1);
-            g.DrawEllipse(pen, x1, y1, x2-x1, y2-y1);
+            g.FillEllipse(brush, x, y, width, height);
+            g.DrawEllipse(pen, x, y, width, height);
         }
     }
 }

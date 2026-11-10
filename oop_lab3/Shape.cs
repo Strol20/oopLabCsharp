@@ -49,11 +49,14 @@ namespace oop_lab3
         public override void Draw(Graphics g, bool isTemporary = false)
         {
             Color fillColor = isTemporary ? Color.Red : Color.Black;
+            Color fillColor = isTemporary ? Color.Blue : Color.Black;
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
             int diameter = 20;
             int radius = diameter / 2;    
             g.FillEllipse(brush, x2 - radius, y2 - radius, diameter, diameter);
             // Для країв точно такеж, але DrawEllipse і т.д.
+            pen.Dispose();
+            brush.Dispose();
         }
     }
 
@@ -63,6 +66,8 @@ namespace oop_lab3
         {
             var (pen, brush) = GetPenAndBrush(isTemporary, colorPaint);
             g.DrawLine(pen, x1, y1, x2, y2);
+            pen.Dispose();
+            brush.Dispose();
         }
     }
 
@@ -70,11 +75,16 @@ namespace oop_lab3
     {
         public override void Draw(Graphics g, bool isTemporary = false)
         {
+            int x = Math.Min(x1, x2);
+            int y = Math.Min(y1, y2);
+            int width = Math.Abs(x2 - x1);
+            int height = Math.Abs(y2 - y1);
             Color fillColor = isTemporary ? Color.Transparent : Color.Orange;
-
             var (pen, brush) = GetPenAndBrush(isTemporary, fillColor);
-            g.FillRectangle(brush, x1, y1, x2 - x1, y2 - y1);
-            g.DrawRectangle(pen, x1, y1, x2 - x1, y2 - y1); 
+            g.FillRectangle(brush, x, y, width, height);
+            g.DrawRectangle(pen, x, y, width, height);
+            pen.Dispose();
+            brush.Dispose();
         }
     }
 
@@ -86,6 +96,8 @@ namespace oop_lab3
             int dy = Math.Abs(y2 - y1);
             var (pen, brush) = GetPenAndBrush(isTemporary, colorPaint);
             g.DrawEllipse(pen, x1 - dx, y1 - dy, 2 * dx, 2 * dy);
+            pen.Dispose();
+            brush.Dispose();
         }
     }
 }
