@@ -107,16 +107,14 @@ namespace oop_lab
 
         private Shape CreateShapeInstance(string shapeTemplate)
         {
-            if (shapeTemplate == "DotShape")
-                return new DotShape();
-            else if (shapeTemplate == "LineShape")
-                return new LineShape();
-            else if (shapeTemplate == "RectangleShape")
-                return new RectangleShape();
-            else if (shapeTemplate == "EllipseShape")
-                return new EllipseShape();
-            else
-                throw new InvalidOperationException("Unknown shape type");
+            return shapeTemplate switch
+            {
+                "DotShape" => new DotShape(),
+                "LineShape" => new LineShape(),
+                "RectangleShape" => new RectangleShape(),
+                "EllipseShape" => new EllipseShape(),
+                _ => throw new InvalidOperationException("Unknown shape type"),
+            };
         }
         //Метод для вибору форми малювання і для оновлення стану кнопок та пунктів меню
         private void SelectShape(string shapeName)
