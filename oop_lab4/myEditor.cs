@@ -15,7 +15,7 @@ namespace oop_lab
         //Singeltone
         private static myEditor _instance;
 
-        private myEditor() 
+        private myEditor()
         { }
 
         public static myEditor getInstance()
@@ -92,21 +92,35 @@ namespace oop_lab
             }
         }
 
-        public Shape CreateShapeInstance(string shapeTemplate)
+        public void SetShape(string shapeName)
         {
-            if (shapeTemplate == "DotShape")
-                return new DotShape();
-            else if (shapeTemplate == "LineShape")
-                return new LineShape();
-            else if (shapeTemplate == "RectangleShape")
-                return new RectangleShape();
-            else if (shapeTemplate == "EllipseShape")
-                return new EllipseShape();
-            else
-                throw new InvalidOperationException("Unknown shape type");
+            currentShapePrototype = shapeName switch
+            {
+                "Крапка" => "DotShape",
+                "Лінія" => "LineShape",
+                "Прямокутник" => "RectangleShape",
+                "Еліпс" => "EllipseShape",
+                "Відрізок з кружечками" => "LineOOShape", // Укажи точный текст твоей кнопки/меню
+                "Куб" => "CubeShape",
+                _ => "DotShape"
+            };
         }
 
-        public void Form1_Paint(object sender, PaintEventArgs e)
+        private Shape CreateShapeInstance(string shapeTemplate)
+        {
+            return shapeTemplate switch
+            {
+                "DotShape" => new DotShape(),
+                "LineShape" => new LineShape(),
+                "RectangleShape" => new RectangleShape(),
+                "EllipseShape" => new EllipseShape(),
+                //"LineOOShape" => new LineOOShape(),
+                //"CubeShape" => new CubeShape(),
+                _ => throw new InvalidOperationException("Unknown shape type"),
+            };
+        }
+
+        public void paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             for (int i = 0; i < shapeCount; i++)

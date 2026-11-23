@@ -5,37 +5,12 @@ namespace oop_lab
 {
     public partial class Form1 : Form
     {
+        myEditor editor = myEditor.getInstance();
         public Form1()
         {
+            myEditor.getInstance();
             InitializeComponent();
             this.DoubleBuffered = true;
-        }
-        Point click;
-        Point currentPoint;
-        bool isDrawing = false; // Чи малюємо зараз лінію чи ні
-        string currentShapeTemplate = "DotShape";
-        private Shape currentDrawingShape = null;
-        private const int N = 122;
-        private Shape[] pcshape = new Shape[N];
-        private int shapeCount = 0;
-        private bool AddShapeToDynamicArray(Shape shape)
-        {
-            if (shape == null) return false;
-
-            if (shapeCount < N)
-            {
-                pcshape[shapeCount] = shape;
-                shapeCount++;
-                return true;
-            }
-            else
-            {
-                MessageBox.Show($"Досягнуто максимальний ліміт елементів масиву (N = {N})!",
-                                "Помилка",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                return false;
-            }
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -43,31 +18,15 @@ namespace oop_lab
             // Не робе. Із за пари строчик коду, заважало виправити мерцання навіть з DoubleBuffered = true;
             //Graphics g;
             //g = CreateGraphics();
-
             Graphics g = e.Graphics;
-            for (int i = 0; i < shapeCount; i++)
-            {
-                if (pcshape[i] != null)
-                {
-                    pcshape[i].Draw(g);
-                }
-            }
-            if (isDrawing)
-            {
-                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y);
-                currentDrawingShape.Draw(g, isDrawing);
-            }
+            editor.paint(sender, e);
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                isDrawing = true;
-                click = e.Location;
-                currentPoint = e.Location;
-                currentDrawingShape = CreateShapeInstance(currentShapeTemplate);
-                this.Invalidate();
+            editor.MouseDown(e, this);
             }
         }
 
@@ -75,59 +34,21 @@ namespace oop_lab
         {
             if (e.Button == MouseButtons.Left)
             {
-                currentPoint = e.Location;
-
-                currentDrawingShape.SetCoordinates(click.X, click.Y, currentPoint.X, currentPoint.Y);
-
-                // TODO: Новий методля для обмеження динамічного масиву
-                AddShapeToDynamicArray(currentDrawingShape);
-                currentDrawingShape = null;
-                isDrawing = false;
-
-                this.Invalidate();
+                editor.MouseUp(e, this);
             }
-
         }
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDrawing)
-            {
-                currentPoint = e.Location;
-                this.Invalidate(); // Запрашиваем перерисовку кадра (для показа превью)
-
-
-            }
-        }
-
-        public class MyEditor()
-        {
-
+            editor.MouseMove(e, this);
         }
 
 
-        private Shape CreateShapeInstance(string shapeTemplate)
-        {
-            return shapeTemplate switch
-            {
-                "DotShape" => new DotShape(),
-                "LineShape" => new LineShape(),
-                "RectangleShape" => new RectangleShape(),
-                "EllipseShape" => new EllipseShape(),
-                _ => throw new InvalidOperationException("Unknown shape type"),
-            };
-        }
+
         //Метод для вибору форми малювання і для оновлення стану кнопок та пунктів меню
         private void SelectShape(string shapeName)
         {
             // Встановлюємо шаблон малювання
-            switch (shapeName)
-            {
-                case "Крапка": currentShapeTemplate = "DotShape"; break;
-                case "Лінія": currentShapeTemplate = "LineShape"; break;
-                case "Прямокутник": currentShapeTemplate = "RectangleShape"; break;
-                case "Еліпс": currentShapeTemplate = "EllipseShape"; break;
-                default: currentShapeTemplate = "DotShape"; break;
-            }
+            editor.SetShape(shapeName);
 
             this.Text = "Графічний редактор - " + shapeName;
 
@@ -142,7 +63,6 @@ namespace oop_lab
                     }
                 }
             }
-
             // Оновлюємо галочки в MenuStrip
             if (objectToolStripMenuItem != null)
             {
