@@ -120,9 +120,11 @@
             // 
             // кубToolStripMenuItem
             // 
+            кубToolStripMenuItem.CheckOnClick = true;
             кубToolStripMenuItem.Name = "кубToolStripMenuItem";
             кубToolStripMenuItem.Size = new Size(249, 26);
             кубToolStripMenuItem.Text = "Куб";
+            кубToolStripMenuItem.Click += toolStripMenuItem_Click;
             // 
             // tipsToolStripMenuItem
             // 

@@ -101,7 +101,7 @@ namespace oop_lab
             brush.Dispose();
         }
     }
-    internal class LineOOShape : Shape // TODO: Окремий метод для розрахунків координатів
+    internal class LineOOShape : Shape //Лінія з кружечками // TODO: Окремий метод для розрахунків координатів
     {
         private readonly EllipseShape startCircle = new EllipseShape();
         private readonly EllipseShape endCircle = new EllipseShape();
@@ -125,9 +125,11 @@ namespace oop_lab
             }
             //Масштабуємо вектор так, щоб його довжина дорівнювала радіусу $R$
             //                               Напрямок
-            int ix = Convert.ToInt32(x1 + (dx / length) * Radius);
-            int iy = Convert.ToInt32(y1 + (dy / length) * Radius);
-            line.SetCoordinates(ix, iy, x2, y2);
+            int ix1 = Convert.ToInt32(x1 + (dx / length) * Radius);
+            int iy1 = Convert.ToInt32(y1 + (dy / length) * Radius);
+            int ix2 = Convert.ToInt32(x2 - (dx / length) * Radius);
+            int iy2 = Convert.ToInt32(y2 - (dy / length) * Radius);
+            line.SetCoordinates(ix1, iy1, ix2, iy2);
             line.Draw(g, isTemporary);
 
             startCircle.SetCoordinates(x1, y1 , x1 + Radius, y1 + Radius);
@@ -136,6 +138,37 @@ namespace oop_lab
             // 3. Задаємо координати і малюємо другий кружечок через EllipseShape
             endCircle.SetCoordinates(x2, y2, x2 + Radius, y2 + Radius);
             endCircle.Draw(g, isTemporary);
+        }
+    }
+    internal class CubeShape : Shape //Куб // TODO: Окремий метод для розрахунків координатів
+    {
+        // 2 прямокутники
+        // 4 лінії
+        private readonly RectangleShape front = new RectangleShape();
+        private readonly RectangleShape back = new RectangleShape();
+        private readonly LineShape line1 = new LineShape();
+        private readonly LineShape line2 = new LineShape();
+        private readonly LineShape line3 = new LineShape();
+        private readonly LineShape line4 = new LineShape();
+        public override void Draw(Graphics g, bool isTemporary = false) // TODO : Окремий метод для кольору?
+        {
+           //У нас є 4 кординати, початок і передвинуті
+            // Розділення по пікселям не дуже. Мабуть краще по 15% 
+
+            int startX = Math.Max(x1, x2);
+            int startY = Math.Max(y1, y2);
+
+            int endX = Math.Min(x1, x2);
+            int endY = Math.Min(y1, y2);
+
+            // Розрахунок зміщення для створення ефекту 3D
+            float width = (startX - endX) * 0.15f;
+            
+            back.SetCoordinates(startX, startY, endX - (int)width, endY - (int)width);
+            back.Draw(g, isTemporary); 
+
+            front.SetCoordinates(startX + (int)width, startY + (int)width, endX, endY);
+            front.Draw(g, isTemporary);
         }
     }
 }
