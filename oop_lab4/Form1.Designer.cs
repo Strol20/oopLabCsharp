@@ -36,6 +36,8 @@
             lineToolStripMenuItem = new ToolStripMenuItem();
             regectalesToolStripMenuItem = new ToolStripMenuItem();
             elipseToolStripMenuItem = new ToolStripMenuItem();
+            lineWithCircleToolStripMenuItem = new ToolStripMenuItem();
+            кубToolStripMenuItem = new ToolStripMenuItem();
             tipsToolStripMenuItem = new ToolStripMenuItem();
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
@@ -67,7 +69,7 @@
             // 
             objectToolStripMenuItem.Checked = true;
             objectToolStripMenuItem.CheckState = CheckState.Checked;
-            objectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pointToolStripMenuItem, lineToolStripMenuItem, regectalesToolStripMenuItem, elipseToolStripMenuItem });
+            objectToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pointToolStripMenuItem, lineToolStripMenuItem, regectalesToolStripMenuItem, elipseToolStripMenuItem, lineWithCircleToolStripMenuItem, кубToolStripMenuItem });
             objectToolStripMenuItem.Name = "objectToolStripMenuItem";
             objectToolStripMenuItem.Size = new Size(75, 24);
             objectToolStripMenuItem.Text = "Об'єкти";
@@ -76,7 +78,7 @@
             // 
             pointToolStripMenuItem.CheckOnClick = true;
             pointToolStripMenuItem.Name = "pointToolStripMenuItem";
-            pointToolStripMenuItem.Size = new Size(224, 26);
+            pointToolStripMenuItem.Size = new Size(249, 26);
             pointToolStripMenuItem.Text = "Крапка";
             pointToolStripMenuItem.ToolTipText = "Малює чорну крапку";
             pointToolStripMenuItem.Click += toolStripMenuItem_Click;
@@ -85,7 +87,7 @@
             // 
             lineToolStripMenuItem.CheckOnClick = true;
             lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            lineToolStripMenuItem.Size = new Size(224, 26);
+            lineToolStripMenuItem.Size = new Size(249, 26);
             lineToolStripMenuItem.Text = "Лінія";
             lineToolStripMenuItem.ToolTipText = "Малює чорну лінію";
             lineToolStripMenuItem.Click += toolStripMenuItem_Click;
@@ -94,7 +96,7 @@
             // 
             regectalesToolStripMenuItem.CheckOnClick = true;
             regectalesToolStripMenuItem.Name = "regectalesToolStripMenuItem";
-            regectalesToolStripMenuItem.Size = new Size(224, 26);
+            regectalesToolStripMenuItem.Size = new Size(249, 26);
             regectalesToolStripMenuItem.Text = "Прямокутник";
             regectalesToolStripMenuItem.ToolTipText = "Малює оранжевий прямокутник";
             regectalesToolStripMenuItem.Click += toolStripMenuItem_Click;
@@ -103,10 +105,24 @@
             // 
             elipseToolStripMenuItem.CheckOnClick = true;
             elipseToolStripMenuItem.Name = "elipseToolStripMenuItem";
-            elipseToolStripMenuItem.Size = new Size(224, 26);
+            elipseToolStripMenuItem.Size = new Size(249, 26);
             elipseToolStripMenuItem.Text = "Еліпс";
             elipseToolStripMenuItem.ToolTipText = "Малює пустий, синій еліпс";
             elipseToolStripMenuItem.Click += toolStripMenuItem_Click;
+            // 
+            // lineWithCircleToolStripMenuItem
+            // 
+            lineWithCircleToolStripMenuItem.CheckOnClick = true;
+            lineWithCircleToolStripMenuItem.Name = "lineWithCircleToolStripMenuItem";
+            lineWithCircleToolStripMenuItem.Size = new Size(249, 26);
+            lineWithCircleToolStripMenuItem.Text = "Відрізок з кружечками";
+            lineWithCircleToolStripMenuItem.Click += toolStripMenuItem_Click;
+            // 
+            // кубToolStripMenuItem
+            // 
+            кубToolStripMenuItem.Name = "кубToolStripMenuItem";
+            кубToolStripMenuItem.Size = new Size(249, 26);
+            кубToolStripMenuItem.Text = "Куб";
             // 
             // tipsToolStripMenuItem
             // 
@@ -202,5 +218,7 @@
         private ToolStripButton toolStripButton2;
         private ToolStripButton toolStripButton3;
         private ToolStripButton toolStripButton4;
+        private ToolStripMenuItem lineWithCircleToolStripMenuItem;
+        private ToolStripMenuItem кубToolStripMenuItem;
     }
 }

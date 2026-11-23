@@ -8,7 +8,6 @@ namespace oop_lab
         myEditor editor = myEditor.getInstance();
         public Form1()
         {
-            myEditor.getInstance();
             InitializeComponent();
             this.DoubleBuffered = true;
         }

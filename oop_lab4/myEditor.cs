@@ -17,7 +17,6 @@ namespace oop_lab
 
         private myEditor()
         { }
-
         public static myEditor getInstance()
         {
             if (_instance == null)
@@ -86,7 +85,7 @@ namespace oop_lab
             if (isDrawing)
             {
                 currentPoint = e.Location;
-                canvas.Invalidate(); // Запрашиваем перерисовку кадра (для показа превью)
+                canvas.Invalidate();
 
 
             }
@@ -100,9 +99,9 @@ namespace oop_lab
                 "Лінія" => "LineShape",
                 "Прямокутник" => "RectangleShape",
                 "Еліпс" => "EllipseShape",
-                "Відрізок з кружечками" => "LineOOShape", // Укажи точный текст твоей кнопки/меню
+                "Відрізок з кружечками" => "LineOOShape",
                 "Куб" => "CubeShape",
-                _ => "DotShape"
+                _ => "LineShape"
             };
         }
 
@@ -114,8 +113,8 @@ namespace oop_lab
                 "LineShape" => new LineShape(),
                 "RectangleShape" => new RectangleShape(),
                 "EllipseShape" => new EllipseShape(),
-                //"LineOOShape" => new LineOOShape(),
-                //"CubeShape" => new CubeShape(),
+                "LineOOShape" => new LineOOShape(),
+                "CubeShape" => new CubeShape(),
                 _ => throw new InvalidOperationException("Unknown shape type"),
             };
         }

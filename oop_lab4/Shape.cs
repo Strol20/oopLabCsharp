@@ -5,6 +5,8 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.LinkLabel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace oop_lab
 {
@@ -97,6 +99,43 @@ namespace oop_lab
             g.DrawEllipse(pen, x1 - dx, y1 - dy, 2 * dx, 2 * dy);
             pen.Dispose();
             brush.Dispose();
+        }
+    }
+    internal class LineOOShape : Shape // TODO: Окремий метод для розрахунків координатів
+    {
+        private readonly EllipseShape startCircle = new EllipseShape();
+        private readonly EllipseShape endCircle = new EllipseShape();
+        private readonly LineShape line = new LineShape();
+        private const int Radius = 20; // радіус кружечків
+
+
+
+        public override void Draw(Graphics g, bool isTemporary = false) // Еліпс
+        {
+            //Повний вектор
+            float dx = x2 - x1;
+            float dy = y2 - y1;
+
+            float length = MathF.Sqrt(dx * dx + dy * dy);
+
+
+            if (length == 0)
+            {
+                length = 1; // Встановлюємо довжину в 1, щоб уникнути ділення на нуль
+            }
+            //Масштабуємо вектор так, щоб його довжина дорівнювала радіусу $R$
+            //                               Напрямок
+            int ix = Convert.ToInt32(x1 + (dx / length) * Radius);
+            int iy = Convert.ToInt32(y1 + (dy / length) * Radius);
+            line.SetCoordinates(ix, iy, x2, y2);
+            line.Draw(g, isTemporary);
+
+            startCircle.SetCoordinates(x1, y1 , x1 + Radius, y1 + Radius);
+            startCircle.Draw(g, isTemporary);
+
+            // 3. Задаємо координати і малюємо другий кружечок через EllipseShape
+            endCircle.SetCoordinates(x2, y2, x2 + Radius, y2 + Radius);
+            endCircle.Draw(g, isTemporary);
         }
     }
 }
