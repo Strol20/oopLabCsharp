@@ -86,8 +86,6 @@ namespace oop_lab
             {
                 currentPoint = e.Location;
                 canvas.Invalidate();
-
-
             }
         }
 

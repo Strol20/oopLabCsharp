@@ -20,20 +20,26 @@ namespace oop_lab
             Graphics g = e.Graphics;
             editor.paint(sender, e);
         }
-
+        private bool isDrawing = false;
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-            editor.MouseDown(e, this);
+                isDrawing = true;
+                editor.MouseDown(e, this);
             }
         }
 
         private void Form1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && isDrawing)
             {
-                editor.MouseUp(e, this);
+                if (isDrawing)
+                {
+                    isDrawing = false;
+                    editor.MouseUp(e, this);
+                }
+                
             }
         }
         private void Form1_MouseMove(object sender, MouseEventArgs e)
