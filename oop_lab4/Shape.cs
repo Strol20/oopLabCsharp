@@ -177,17 +177,17 @@ namespace oop_lab
             int offsetY = (int)(height * 0.10f);
 
             // Задній прямокутник
-            int bstartX = left;
+            int bstartX = left + offsetX;
             int bstartY = top;
 
-            int bendX = right - offsetX;
+            int bendX = right;
             int bendY = bottom - offsetY;
 
             // Передній прямокутник
-            int fstartX = left + offsetX;
+            int fstartX = left;
             int fstartY = top + offsetY;
 
-            int fendX = right;
+            int fendX = right - offsetX;
             int fendY = bottom;
 
             front.SetCoordinates(fstartX, fstartY, fendX, fendY);
