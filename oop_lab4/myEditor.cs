@@ -11,7 +11,7 @@ namespace oop_lab
 {
     public class myEditor
     {
-        // 1. Глобальний статичний об'єкт для непарного варіанта (№21)
+        // 1. Глобальний статичний об'єкт N21
         //Singeltone
         private static myEditor _instance;
 
@@ -20,7 +20,9 @@ namespace oop_lab
         public static myEditor getInstance()
         {
             if (_instance == null)
+            {
                 _instance = new myEditor();
+            }
             return _instance;
         }
 
