@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.LinkLabel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -144,6 +145,12 @@ namespace oop_lab
     {
         // 2 прямокутники
         // 4 лінії
+
+        //TODO: ОКРЕМИЙ МЕТОД КОЛЬОРІВ
+        //TODO: ОКРЕМИЙ МЕТОД КОЛЬОРІВ
+        //TODO: ОКРЕМИЙ МЕТОД КОЛЬОРІВ
+        //TODO: ОКРЕМИЙ МЕТОД КОЛЬОРІВ
+        //TODO: ОКРЕМИЙ МЕТОД КОЛЬОРІВ
         private readonly RectangleShape front = new RectangleShape();
         private readonly RectangleShape back = new RectangleShape();
         private readonly LineShape line1 = new LineShape();
@@ -152,23 +159,54 @@ namespace oop_lab
         private readonly LineShape line4 = new LineShape();
         public override void Draw(Graphics g, bool isTemporary = false) // TODO : Окремий метод для кольору?
         {
-           //У нас є 4 кординати, початок і передвинуті
-            // Розділення по пікселям не дуже. Мабуть краще по 15% 
+            //У нас є 4 кординати, початок і передвинуті
+            // Розділення по пікселям не дуже. Мабуть краще по 10% 
 
-            int startX = Math.Max(x1, x2);
-            int startY = Math.Max(y1, y2);
 
-            int endX = Math.Min(x1, x2);
-            int endY = Math.Min(y1, y2);
+            //Раніше були start та end. Але я заплутвася через це
 
-            // Розрахунок зміщення для створення ефекту 3D
-            float width = (startX - endX) * 0.15f;
-            
-            back.SetCoordinates(startX, startY, endX - (int)width, endY - (int)width);
-            back.Draw(g, isTemporary); 
+            int left = Math.Min(x1, x2);
+            int right = Math.Max(x1, x2);
+            int top = Math.Min(y1, y2);
+            int bottom = Math.Max(y1, y2);
 
-            front.SetCoordinates(startX + (int)width, startY + (int)width, endX, endY);
+            int width = right - left;
+            int height = bottom - top;
+
+            int offsetX = (int)(width * 0.10f);
+            int offsetY = (int)(height * 0.10f);
+
+            // Задній прямокутник
+            int bstartX = left;
+            int bstartY = top;
+
+            int bendX = right - offsetX;
+            int bendY = bottom - offsetY;
+
+            // Передній прямокутник
+            int fstartX = left + offsetX;
+            int fstartY = top + offsetY;
+
+            int fendX = right;
+            int fendY = bottom;
+
+            front.SetCoordinates(fstartX, fstartY, fendX, fendY);
+            back.SetCoordinates(bstartX, bstartY, bendX, bendY);
+
+            line1.SetCoordinates(fstartX, fstartY, bstartX, bstartY);
+            line2.SetCoordinates(fendX, fstartY, bendX, bstartY);
+            line3.SetCoordinates(fstartX, fendY, bstartX, bendY);
+            line4.SetCoordinates(fendX, fendY, bendX, bendY);
+
+            back.Draw(g, isTemporary);
+
+            line1.Draw(g, isTemporary);
+            line2.Draw(g, isTemporary);
+            line3.Draw(g, isTemporary);
+            line4.Draw(g, isTemporary);
+
             front.Draw(g, isTemporary);
+
         }
     }
 }
